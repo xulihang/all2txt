@@ -37,6 +37,9 @@ Sub convertToXliff(resp As ServletResponse,path As String,convertedPath As Strin
 		'resp.Write("<br/>Below is the extraced text.<br/>")
 		Dim text As String
 		text=xliffFilter.getText(File.Combine(convertedPath,filename&".xlf"))
+		If filename.EndsWith(".pdf") Then
+			text=utils.removeLines(text)
+		End If
 		'File.WriteString(File.Combine(File.Combine(File.DirApp,"www"),"output"),filename&".txt",text)
 		'resp.SendRedirect("/output/"&filename&".txt")
 		text="<p>"&text.Replace(CRLF,"</p><p>")&"</p>"

@@ -10,6 +10,7 @@ Sub Process_Globals
 End Sub
 
 Sub extract(sl As String,tl As String,filepath As String,outputDir As String) As ResumableSub
+	SetSystemProperty("sun.java2d.cmm", "sun.java2d.cmm.kcms.KcmsServiceProvider")
 	Dim sh As Shell
 	Dim args As List
 	args.Initialize
