@@ -1,0 +1,42 @@
+﻿AppType=StandardJava
+Build1=Default,b4j.example
+Group=Default Group
+Library1=jcore
+Library2=jserver
+Library3=jshell
+Library4=jstringutils
+Library5=xml2map
+Module1=convert
+Module2=tikal
+Module3=FileUpload
+Module4=xliffFilter
+Module5=XMLUtils
+NumberOfFiles=0
+NumberOfLibraries=5
+NumberOfModules=5
+Version=7
+@EndOfDesignText@
+'Non-UI application (console / server application)
+#Region Project Attributes 
+	#CommandLineArgs:
+	#MergeLibraries: True 
+#End Region
+
+Sub Process_Globals
+	Private srvr As Server
+End Sub
+
+Sub AppStart (Args() As String)
+	srvr.Initialize("")
+	srvr.Port = 51042
+	srvr.AddHandler("/convert", "convert", False)
+	srvr.AddHandler("/FileUpload", "FileUpload", False)
+	srvr.Start
+
+	StartMessageLoop
+End Sub
+
+'Return true to allow the default exceptions handler to handle the uncaught exception.
+Sub Application_Error (Error As Exception, StackTrace As String) As Boolean
+	Return True
+End Sub
