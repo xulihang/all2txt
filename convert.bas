@@ -16,7 +16,7 @@ End Sub
 Sub Handle(req As ServletRequest, resp As ServletResponse)
 	Try
 		resp.CharacterEncoding="UTF-8"
-		resp.ContentType = "text/html"
+		resp.ContentType = "application/octet-stream"
 		'resp.Write("converting...")
 		Dim su As StringUtils
 		Dim filename As String=su.DecodeUrl(req.GetParameter("filename"),"UTF8")
@@ -40,13 +40,10 @@ Sub convertToXliff(resp As ServletResponse,path As String,convertedPath As Strin
 		If filename.EndsWith(".pdf") Then
 			text=Utils.removeLines(text)
 		End If
-		'Dim bytes() As Byte
-		'bytes=text.GetBytes("UTF8")
-		'File.WriteString(File.Combine(File.Combine(File.DirApp,"www"),"output"),filename&".txt",text)
-		'resp.SendRedirect("/output/"&filename&".txt")
-		text="<pre>"&text&"</pre>"
-		resp.Write(text)
-		'resp.OutputStream.WriteBytes(bytes,0,bytes.Length)
+		resp.SetHeader("Content-disposition", $"attachment; filename=${filename&".txt"}"$)
+		Dim bytes() As Byte
+		bytes=text.GetBytes("UTF8")
+		resp.OutputStream.WriteBytes(bytes,0,bytes.Length)
 	Else
 		resp.SendError(500, "Convert Failed")
 	End If
