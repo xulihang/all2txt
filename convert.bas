@@ -38,12 +38,15 @@ Sub convertToXliff(resp As ServletResponse,path As String,convertedPath As Strin
 		Dim text As String
 		text=xliffFilter.getText(File.Combine(convertedPath,filename&".xlf"))
 		If filename.EndsWith(".pdf") Then
-			text=utils.removeLines(text)
+			text=Utils.removeLines(text)
 		End If
+		'Dim bytes() As Byte
+		'bytes=text.GetBytes("UTF8")
 		'File.WriteString(File.Combine(File.Combine(File.DirApp,"www"),"output"),filename&".txt",text)
 		'resp.SendRedirect("/output/"&filename&".txt")
-		text="<p>"&text.Replace(CRLF,"</p><p>")&"</p>"
+		text="<pre>"&text&"</pre>"
 		resp.Write(text)
+		'resp.OutputStream.WriteBytes(bytes,0,bytes.Length)
 	Else
 		resp.SendError(500, "Convert Failed")
 	End If
