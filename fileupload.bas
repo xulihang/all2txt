@@ -37,7 +37,7 @@ Sub Handle(req As ServletRequest, resp As ServletResponse)
 						Return
 					End If
 					Dim su As StringUtils
-					resp.SendRedirect("/convert?filename="&su.EncodeUrl(p.SubmittedFilename,"UTF8"))
+					resp.SendRedirect("/convert2?filename="&su.EncodeUrl(p.SubmittedFilename,"UTF8"))
 				End If
 			Next
 		End If

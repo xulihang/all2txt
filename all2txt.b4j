@@ -6,15 +6,18 @@ Library2=jserver
 Library3=jshell
 Library4=jstringutils
 Library5=xml2map
+Library6=javaobject
 Module1=convert
 Module2=tikal
 Module3=FileUpload
 Module4=xliffFilter
 Module5=XMLUtils
 Module6=Utils
+Module7=tika
+Module8=convert2
 NumberOfFiles=0
-NumberOfLibraries=5
-NumberOfModules=6
+NumberOfLibraries=6
+NumberOfModules=8
 Version=7
 @EndOfDesignText@
 'Non-UI application (console / server application)
@@ -22,6 +25,8 @@ Version=7
 	#CommandLineArgs:
 	#MergeLibraries: True 
 #End Region
+
+#AdditionalJar: tika-app-1.20
 
 Sub Process_Globals
 	Private srvr As Server
@@ -31,6 +36,7 @@ Sub AppStart (Args() As String)
 	srvr.Initialize("")
 	srvr.Port = 51042
 	srvr.AddHandler("/convert", "convert", False)
+	srvr.AddHandler("/convert2", "convert2", False)
 	srvr.AddHandler("/FileUpload", "FileUpload", False)
 	srvr.Start
 
